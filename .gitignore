@@ -1,0 +1,16 @@
+bin/
+obj/
+.idea/
+.vs/
+*.user
+Directory.Build.local.props
+artifacts/
+TestResults/
+
+.env
+.env.*
+*.pfx
+*.p12
+*.key
+release-assets/
+backups/

@@ -1,0 +1,10 @@
+{
+  "Name": "ETDisplay",
+  "Author": "该死之人 奇里格",
+  "Description": "监听 Say、Yell、Shout 和 Echo 中的 ET 报时，以高清字体显示并计算倒计时；支持音量调节、末10秒读秒、休息区清空及独立SS侦察提示。API15设置界面候选版RC2：五页左侧导航与独立外观预览；发布前仍需完成客户端综合回归。", 
+  "Punchline": "狩猎 ET 倒计时、SS提示与分级语音", 
+  "InternalName": "ETDisplay",
+  "ApplicableVersion": "any",
+  "DalamudApiLevel": 15,
+  "Tags": [ "ET", "狩猎", "时间" ]
+}

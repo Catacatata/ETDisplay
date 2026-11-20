@@ -1,0 +1,10 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+  </Configurations>
+  <Project Path="ETDisplay.Core.Tests/ETDisplay.Core.Tests.csproj" />
+  <Project Path="ETDisplay.Core/ETDisplay.Core.csproj" />
+  <Project Path="ETDisplay/ETDisplay.csproj">
+    <Platform Project="x64" />
+  </Project>
+</Solution>

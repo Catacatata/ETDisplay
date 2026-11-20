@@ -1,0 +1,3 @@
+<Project>
+  <!-- Intentionally empty: the verification snapshot must not import ancestor targets. -->
+</Project>

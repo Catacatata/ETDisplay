@@ -1,0 +1,25 @@
+[
+    {
+        "Author":  "该死之人 奇里格",
+        "Name":  "ETDisplay",
+        "InternalName":  "ETDisplay",
+        "AssemblyVersion":  "1.0.0.2",
+        "Description":  "公开测试版。狩猎ET报时、高清浮层、倒计时、末10秒读秒及独立SS侦察提示。Windows x64 / Dalamud API15；使用本机Windows语音，其他语言与环境兼容性需验证。",
+        "ApplicableVersion":  "any",
+        "RepoUrl":  "https://github.com/Catacatata/ETDisplay",
+        "Tags":  [
+                     "ET",
+                     "狩猎",
+                     "倒计时",
+                     "SS"
+                 ],
+        "DalamudApiLevel":  15,
+        "LoadPriority":  0,
+        "IsHide":  false,
+        "LastUpdate":  1795078327,
+        "Punchline":  "狩猎ET倒计时、SS提示与分级语音（公开测试版）",
+        "Changelog":  "1.0.0.2-rc2：五页简洁设置与独立静音预览；保留ET/倒计时/SS规则。Debug与Release各283项测试通过，欢迎反馈安装及兼容性问题。",
+        "DownloadLinkInstall":  "https://github.com/Catacatata/ETDisplay/releases/download/v1.0.0.2-rc2/ETDisplay-1.0.0.2-rc2.zip",
+        "DownloadLinkUpdate":  "https://github.com/Catacatata/ETDisplay/releases/download/v1.0.0.2-rc2/ETDisplay-1.0.0.2-rc2.zip"
+    }
+]

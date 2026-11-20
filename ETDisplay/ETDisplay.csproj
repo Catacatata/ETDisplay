@@ -1,0 +1,16 @@
+<Project Sdk="Dalamud.NET.Sdk/15.0.0">
+    <PropertyGroup>
+        <Version>1.0.0.2</Version>
+        <InformationalVersion>1.0.0.2-rc2</InformationalVersion>
+        <TargetFramework>net10.0-windows</TargetFramework>
+        <!-- DALAMUD_HOME or the local override takes precedence over the CN fallback. -->
+        <DalamudLibPath Condition="'$(DALAMUD_HOME)' == '' and Exists('$(AppData)\XIVLauncherCN\addon\Hooks\dev\Dalamud.dll')">$(AppData)\XIVLauncherCN\addon\Hooks\dev\</DalamudLibPath>
+    </PropertyGroup>
+    <Import Project="../Directory.Build.local.props" Condition="Exists('../Directory.Build.local.props')" />
+    <ItemGroup>
+      <ProjectReference Include="../ETDisplay.Core/ETDisplay.Core.csproj" />
+      <PackageReference Include="System.Speech" Version="10.0.7" />
+      <PackageReference Update="DalamudPackager" Version="15.0.0" />
+      <PackageReference Update="DotNet.ReproducibleBuilds" Version="2.0.5" />
+    </ItemGroup>
+</Project>
