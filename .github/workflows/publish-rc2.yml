@@ -1,0 +1,29 @@
+name: Publish verified RC2
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/publish-rc2.yml'
+      - 'scripts/Publish-VerifiedRelease.ps1'
+      - 'release-payload/v1.0.0.2-rc2/**'
+permissions:
+  contents: write
+concurrency:
+  group: etdisplay-publish-rc2
+  cancel-in-progress: false
+jobs:
+  publish:
+    if: github.repository == 'Catacatata/ETDisplay'
+    runs-on: windows-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out publishing materials
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Validate fixed payload checksums and source tag, then publish
+        shell: pwsh
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: ./scripts/Publish-VerifiedRelease.ps1
