@@ -52,19 +52,24 @@ $headers = @{ Authorization = "Bearer $env:GITHUB_TOKEN"; Accept = 'application/
 function Api([string]$Method, [string]$Path, $Body = $null) {
     $params = @{ Uri = "https://api.github.com/repos/$repo/$Path"; Method = $Method; Headers = $headers }
     if ($null -ne $Body) { $params.Body = ConvertTo-Json -InputObject $Body -Depth 8; $params.ContentType = 'application/json; charset=utf-8' }
-    Invoke-RestMethod @params
+    $response = Invoke-RestMethod @params
+    # REST arrays are emitted as one pipeline object in PowerShell 7. Normalize explicitly,
+    # especially an empty release/asset list under StrictMode.
+    if ($response -is [Array]) {
+        foreach ($item in $response) { Write-Output $item }
+    } elseif ($null -ne $response) { Write-Output $response }
 }
 $tagRef = Api 'GET' "git/ref/tags/$tag"
 $target = $tagRef.object
 if ($target.type -eq 'tag') { $tagData = Api 'GET' "git/tags/$($target.sha)"; $target = $tagData.object }
 if ($target.type -ne 'commit' -or $target.sha -ne $sourceCommit) { throw 'Release source tag moved; refusing publication.' }
 $releases = @(Api 'GET' 'releases?per_page=100')
-$matches = @($releases | Where-Object { $_.tag_name -eq $tag })
-if ($matches.Count -gt 1) { throw 'Ambiguous release.' }
-if ($matches.Count -eq 0) {
+$matchingReleases = @($releases | Where-Object { $_.tag_name -eq $tag })
+if ($matchingReleases.Count -gt 1) { throw 'Ambiguous release.' }
+if ($matchingReleases.Count -eq 0) {
     $notes = Get-Content (Join-Path $payload 'RELEASE-NOTES.md') -Raw -Encoding UTF8
     $release = Api 'POST' 'releases' @{ tag_name = $tag; target_commitish = $sourceCommit; name = 'ETDisplay 1.0.0.2-rc2 - public test'; body = $notes; draft = $true; prerelease = $true }
-} else { $release = $matches[0] }
+} else { $release = $matchingReleases[0] }
 if (!$release.prerelease) { throw 'Existing release is not marked as a pre-release; refusing to change it.' }
 $files = @($expected.Keys) + @('SHA256SUMS.txt')
 foreach ($name in $files) {
